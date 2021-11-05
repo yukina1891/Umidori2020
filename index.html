@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Umidori</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="map"></div>
+    <div class="overlay">
+        <h3>birdID</h3>
+        <form name="read_data">
+            <li><label><input type="checkbox" name="data" id="10a92511" onchange="main_read(this)" data-scgroup="readData">10a92511</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92512" onchange="main_read(this)" data-scgroup="readData">10a92512</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92513" onchange="main_read(this)" data-scgroup="readData">10a92513</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92514" onchange="main_read(this)" data-scgroup="readData">10a92514</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92515" onchange="main_read(this)" data-scgroup="readData">10a92515</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92516" onchange="main_read(this)" data-scgroup="readData">10a92516</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92517" onchange="main_read(this)" data-scgroup="readData">10a92517</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92518" onchange="main_read(this)" data-scgroup="readData">10a92518</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92519" onchange="main_read(this)" data-scgroup="readData">10a92519</label></li>
+            <li><label><input type="checkbox" name="data" id="10a92520" onchange="main_read(this)" data-scgroup="readData">10a92520</label></li>
+        </form>
+        <div id="color_list"></div>
+        <div class="map-overlay">    
+            <div class="map-overlay-inner">
+                <label id="median"></label>
+                <h3>median</h3>
+                <input id="slider" type="range" min="0" max="30" step="1" value="0" onchange="read_median()"/>
+            </div>
+        </div>
+        <div id="result"></div>
+        <h3>Trajectory</h3>
+        <form name="trajectory_data">
+            <li><label><input type="checkbox" id="trajectory1" name="trajectory_type1" value="saturation" onchange="main_trajectory(this)" data-scgroup="trajectory">brightness</label></li>
+            <li><label><input type="checkbox" id="trajectory2" name="trajectory_type2" value="gradation" onchange="main_trajectory(this)" data-scgroup="trajectory">hue</label></li>
+            <li><label><input type="checkbox" id="trajectory3" name="trajectory_type3" value="animation" onchange="main_trajectory(this)" data-scgroup="trajectory">animation</label></li>
+        </form>
+        <!-- <p><button type="button" onclick="mediator_action()" id="button3">action</button></p> -->
+        <h3>Action</h3>
+        <form name="action_data">
+            <li><label><input type="checkbox" id="action1" name="action_type" value="3piechart" onchange="main_action(this)" data-scgroup="action"> 3color-piechart</label></li>
+            <li><label><input type="checkbox" id="action2" name="action_type" value="2piechart" onchange="main_action(this)" data-scgroup="action"> 2color-piechart</label></li>
+            <li><label><input type="checkbox" id="action3" name="action_type" value="rgb" onchange="main_action(this)" data-scgroup="action"> RGB</label></li>
+            <li><label><input type="checkbox" id="action4" name="action_type" value="barGraph2d" onchange="main_action(this)" data-scgroup="action"> BarGraph2d</label></li>
+            <li><label><input type="checkbox" id="action5" name="action_type" value="barGraph3d" onchange="main_action(this)" data-scgroup="action"> BarGraph3d</label></li>
+        </form>
+        <p><button type="button" id="replay" name="replay">Replay</button></p>
+    </div>
+
+    <div id="3color-legend" class="legend">
+        <h4>Action</h4>
+        <div>
+            <input type="color" id="flying_3d" name="flying_3d" value="#ff0000">
+            <label for="flying_3d">flying</label>
+        </div>
+        <div>
+            <input type="color" id="feeding_3d" name="feeding_3d" value="#00ff00">
+            <label for="flying_3d">feeding</label>
+        </div>
+        <div>
+            <input type="color" id="rest_3d" name="rest_3d" value="#0000ff">
+            <label for="flying_3d">rest</label>
+        </div>
+    </div>
+    <div id="2color-legend" class="legend">
+        <h4>Action</h4>
+        <div>
+            <input type="color" id="flying_2d" name="flying_2d" value="#ff0000">
+            <label for="flying_2d">flying</label>
+        </div>
+        <div></span>size:feeding</div>
+        <div>
+            <input type="color" id="rest_2d" name="rest_2d" value="#ffffff">
+            <label for="rest_2d">rest</label>
+        </div>
+    </div>
+    <div id="rgbPoint" class="legend">
+        <h4>Action</h4>
+        <div><span style="background-color: #ff0000"></span>flying</div>
+        <div><span style="background-color: #00ff00"></span>feeding</div>
+        <div><span style="background-color: #0000ff"></span>rest</div>
+    </div>
+    <!-- <div id="bar-graph" class="legend">
+        <h4>Action</h4>
+        <div>
+            <input type="color" id="flying_bar" name="flying_bar" value="#ff0000">
+            <label for="flying_bar">flying</label>
+        </div>
+        <div>
+            <input type="color" id="feeding_bar" name="feeding_bar" value="#00ff00">
+            <label for="flying_bar">feeding</label>
+        </div>
+        <div>
+            <p>グラフの高さ：rest</p>
+        </div>
+    </div> -->
+
+    <script type="text/javascript" src="js/DataReader/color_conversion.js"></script>
+    <script type="text/javascript" src="js/DataReader/DataRead.js"></script>
+    <script type="text/javascript" src="js/DataReader/DataReader_smooth.js"></script>
+    <script type="text/javascript" src="js/display/mediator.js"></script>
+    <script type="text/javascript" src="js/trajectory/saturation.js"></script>
+    <script type="text/javascript" src="js/trajectory/gradation.js"></script>
+    <script type="text/javascript" src="js/trajectory/animation.js"></script>
+    <script type="text/javascript" src="js/action/piechart_3d.js"></script>
+    <script type="text/javascript" src="js/action/piechart_2d.js"></script>
+    <script type="text/javascript" src="js/action/rgbPoint.js"></script>
+    <script type="text/javascript" src="js/action/bar_graph_2d.js"></script>
+    <script type="text/javascript" src="js/action/bar_graph_3d.js"></script>
+
+
+</body>
+</html>
