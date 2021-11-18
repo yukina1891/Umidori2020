@@ -176,5 +176,4 @@ function main_barGraph_2d() {
         if (e.sourceId !== 'data') return
         update()
     })
-    console.log("なぜ表示されない？");
 }

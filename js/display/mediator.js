@@ -37,7 +37,6 @@ $(function(){
 	var uniquecheck = $('input[type=checkbox]');
 	uniquecheck.click(function() {
 		var group = $(this).attr('data-scgroup');
-        // console.log("実行されたよ〜")
 
 		uniquecheck.filter(function() {
 			return $(this).attr('data-scgroup') == group;
@@ -134,10 +133,8 @@ function mediator_action(){
     }else if(checkedAction3.checked){
         main_rgbPoint(0);
     }else if(checkedAction4.checked){
-        // console.log("変わったよ〜");
         main_barGraph_2d();
     }else if(checkedAction5.checked){
-        // console.log("変わったよ〜");
         main_barGraph_3d();
     }
 }
