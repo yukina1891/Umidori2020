@@ -1,5 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoieXVraW5hMTg5MSIsImEiOiJjazkzam1lbjcwMWZmM2ZwNW5oaGlyMmIwIn0.wTnbDZxtKcSwBomDrWA6vw';
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [141.313730, 44.427621], //中心（天売島）の座標
@@ -92,7 +92,6 @@ function main_action(action_data) {
         features = null;
         jsondata = null;
 	} else if(actionType == 'action3'){
-        console.log("ここ通ってるかな〜？");
         map.removeLayer('rgbPoint0');
         map.removeSource('rgbPoint0');
         rgbPoint = null;

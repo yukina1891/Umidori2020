@@ -7,15 +7,12 @@ function main_piechart3d() {
     color_3d2 = document.getElementById("feeding_3d").value;
     color_3d3 = document.getElementById("rest_3d").value;
     birdColors_3d = [color_3d1, color_3d2, color_3d3];
-    // console.log(birdColors_3d);
     if(features != null){
-        // console.log(features);
         map.removeLayer('bird');
         map.removeSource('birdsData');
         marker.remove();
         features = null;
         jsondata = null;
-        // console.log(features);
     }
     if(rgbPoint != null){
         map.removeLayer('rgbPoint0');

@@ -33,7 +33,6 @@ function main_wbsPoint(data_number) {
                 'coordinates': [pos[0], pos[1]]
             }
         };
-        // console.log(rgb2hex(hsvtorgb(wb)));
     }  
     draw_wbsPoint(data_number);
 }

@@ -6,18 +6,13 @@ function main_piechart2d() {
     color_2d1 = document.getElementById("flying_2d").value;
     color_2d2 = document.getElementById("rest_2d").value;
     birdColors_2d = [color_2d1, color_2d2, "#a9a9a9"];
-    console.log("来てるよ〜");
     if(features != null){
-        console.log(features);
-        console.log("消す作業してるよ〜");
         map.removeLayer('bird');
         map.removeSource('birdsData');
         marker.remove();
         features = null;
         jsondata = null;
-        console.log(features);
     }
-    console.log(rgbPoint);
     if(rgbPoint != null){
         map.removeLayer('rgbPoint0');
         map.removeSource('rgbPoint0');
@@ -90,7 +85,6 @@ function main_piechart2d() {
 
     function updateMarkers() {
         if(stockMarkers !== null) {
-            console.log("ここも消してるよ〜");
             marker.remove();
         }
         var features = map.querySourceFeatures('birdsData');
@@ -158,7 +152,6 @@ function createDonutChart(props) {
                 birdColors_2d[i]
             );
             varify++;
-            // console.log("0%");
         }else if(counts[i] == 0 && varify == 1){
             html += donutSegment(
                 0,
@@ -168,7 +161,6 @@ function createDonutChart(props) {
                 birdColors_2d[2]
             );
             varify = 0;
-            // console.log("100%");
         }else{
             html += donutSegment(
                 offsets[i] / total,
@@ -178,7 +170,6 @@ function createDonutChart(props) {
                 birdColors_2d[i]
             );
         }
-        // console.log(counts[i]);
     }
 
     html += '</svg></div>';

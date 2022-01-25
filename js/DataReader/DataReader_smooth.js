@@ -14,8 +14,6 @@ function start(){
         else if(day_k < day_t) k++;
         else if(day_k > day_t) t++;
     }
-    // console.log(day_k.getTime());
-    // console.log(day_t.getTime());
 }
 
 //N日間の行動の割合を出力
@@ -82,7 +80,6 @@ function smooth_tyakusui(N){
         d++;
         j = 0;
     }
-    // console.log(new_tyakusui);
 
 	function strToDate(date) {
 		var x = date.split('-');
@@ -138,14 +135,12 @@ function smooth_kiseki(N) {
         day1 = new Date(kiseki[i][1].split('-').join('/'));
         while(day1.getTime() > dayN.getTime()){
             if(kara > 0 && med_lon.length > 0 && p > 0){
-                // console.log("kara");
                 var med_tmp = [];
                 med_tmp[0] = median(med_lon);
                 med_tmp[1] = median(med_lat);
 
                 var before_lon = new_kiseki[p-1][0];
                 var before_lat = new_kiseki[p-1][1];
-                // console.log(med_tmp);
                 
                 var diff_lon = (Math.abs(before_lon - med_tmp[0]))/(kara+1);
                 var diff_lat = (Math.abs(before_lat - med_tmp[1]))/(kara+1);
@@ -158,8 +153,6 @@ function smooth_kiseki(N) {
                         new_kiseki[p] = kara_tmp;
                         p++;
                     }
-                    // console.log(Math.min(before_lon, med_tmp[0]));
-                    // console.log(kara_tmp);
                 }
                 kara = 0;
 
@@ -173,7 +166,6 @@ function smooth_kiseki(N) {
             }else if(med_lon.length == 0){
                 kara++;
                 n = 0;
-                // console.log(kara);
             }else{
                 if(day1.getMonth() > 6 || day1.getMonth() < 2){
                     var med_tmp = [];
@@ -188,13 +180,10 @@ function smooth_kiseki(N) {
             }
             dayN.setDate(dayN.getDate() + N); 
         }
-        // console.log(day1);
-        // console.log(dayN);
         if(day1.getTime() <= dayN.getTime()){
             med_lon[n] = parseFloat(kiseki[i][2]);
             med_lat[n] = parseFloat(kiseki[i][3]);
             n++;
-            // console.log(med_lon);
         }
     }
         
@@ -235,9 +224,6 @@ function smooth_combination() {
     var t = 0;
     var p = 0;
 
-    // console.log(new_kiseki);
-    // console.log(new_tyakusui);
-
 	while(k < new_kiseki.length && t < new_tyakusui.length){
         var tmp = [];
         tmp[0] = new_tyakusui[t][0];
@@ -252,5 +238,4 @@ function smooth_combination() {
         t++;
         p++;
     }
-	// console.log(combi);
 }

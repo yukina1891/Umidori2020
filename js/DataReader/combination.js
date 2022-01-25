@@ -216,7 +216,6 @@ function combination() {
 		t_i++;
 		p++;
 	}
-	// console.log(combi);
 }
 
 function outputFile() {
@@ -228,7 +227,6 @@ function outputFile() {
 		}
 		s += "\n";
 	}
-	// console.log(s);
 
 	let blob = new Blob([s], { type: "text/plan" });
 	let link = document.createElement('a');

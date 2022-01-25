@@ -53,10 +53,8 @@ function reqListener () {
 	}
 }
 
-function read_median() {
-	// console.log("ここはいつ〜？");
+function ff() {
 	if(N_med == 0){
-		// console.log(kiseki);
 		conversion_kiseki();
 		conversion_tyakusui();
 		combination();
@@ -205,6 +203,4 @@ function combination() {
 		t_i++;
 		p++;
 	}
-	console.log(combi);
-	// console.log("ここはちゃんときてる〜？");
 }

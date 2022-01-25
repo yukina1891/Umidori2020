@@ -2,7 +2,6 @@ function main_barGraph_3d() {
     document.getElementById("3color-legend").style.display = 'none';
     document.getElementById("2color-legend").style.display = 'none';
     document.getElementById("rgbPoint").style.display = 'none';
-    console.log("ココマデキタ");
   
     const geojson = {
         "type": "FeatureCollection",
@@ -26,12 +25,6 @@ function main_barGraph_3d() {
             }
         })
     }
-
-    // const position = d3.select("#position");
-    console.log("どこまできてるかチェック1");
-
-    // map.on('load', function() {
-    console.log("どこまできてるかチェック2");
 
     map.addLayer({
         'id': 'sky',
@@ -119,8 +112,6 @@ function main_barGraph_3d() {
             'fill-extrusion-opacity': 1.0
         }
     });
-
-    console.log("どこまできてるかチェック3");
 
     function update() {
 
@@ -244,5 +235,4 @@ function main_barGraph_3d() {
         if (e.sourceId !== 'data') return
         update()
     })
-    console.log("なぜ表示されない？");
 }

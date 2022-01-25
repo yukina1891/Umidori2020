@@ -138,7 +138,6 @@ function conversion_tyakusui() {
 			tmp[2] = feeding * 100 / count_noon;
 			tmp[3] = rest * 100 / count_noon;
             new_tyakusui[d] = tmp;
-            // console.log(count_noon);
 
             count = 0;
             count_noon = 0;
@@ -222,7 +221,6 @@ function combination() {
 		t_i++;
 		p++;
 	}
-	// console.log(combi);
 }
 
 function outputFile() {
@@ -234,7 +232,6 @@ function outputFile() {
 		}
 		s += "\n";
 	}
-	// console.log(s);
 
 	let blob = new Blob([s], { type: "text/plan" });
 	let link = document.createElement('a');
@@ -243,10 +240,4 @@ function outputFile() {
 	link.innerText = 'ダウンロードします';
 	const result = document.getElementById('result');
 	result.appendChild(link);
-
-	// let blob = new Blob(['あいうえお'],{type:"text/plan"});
-	// let link = document.createElement('a');
-	// link.href = URL.createObjectURL(blob);
-	// link.download = '作ったファイル.txt';
-	// link.click();
 }
