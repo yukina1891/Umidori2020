@@ -1,4 +1,10 @@
 function main_barGraph_3d() {
+    map.flyTo({
+        center: [141.313730, 44.427621], //中心（天売島）の座標
+        zoom: 4,
+        pitch: 70,
+        essential: true
+    });
     document.getElementById("3color-legend").style.display = 'none';
     document.getElementById("2color-legend").style.display = 'none';
     document.getElementById("rgbPoint").style.display = 'none';
