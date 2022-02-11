@@ -1,4 +1,9 @@
 function main_piechart2d() {
+    color_2d1 = document.getElementById("flying_2d").value;
+    color_2d2 = document.getElementById("rest_2d").value;
+
+    birdColors_2d = [color_2d1, color_2d2, "#a9a9a9"];
+    
     document.getElementById("3color-legend").style.display = 'none';
     document.getElementById("2color-legend").style.display = 'block';
     document.getElementById("rgbPoint").style.display = 'none';
@@ -6,18 +11,8 @@ function main_piechart2d() {
     color_2d1 = document.getElementById("flying_2d").value;
     color_2d2 = document.getElementById("rest_2d").value;
     birdColors_2d = [color_2d1, color_2d2, "#a9a9a9"];
-    if(features != null){
-        map.removeLayer('bird');
-        map.removeSource('birdsData');
-        marker.remove();
-        features = null;
-        jsondata = null;
-    }
-    if(rgbPoint != null){
-        map.removeLayer('rgbPoint0');
-        map.removeSource('rgbPoint0');
-        rgbPoint = null;
-    }
+    
+    clear_action()
 
     features = combi.slice(0).map(record => ({
         'type': 'Feature',
@@ -73,12 +68,12 @@ function main_piechart2d() {
          
     // Change the cursor to a pointer when the mouse is over the places layer.
     map.on('mouseenter', 'bird', function () {
-    map.getCanvas().style.cursor = 'pointer';
+        map.getCanvas().style.cursor = 'pointer';
     });
         
     // Change it back to a pointer when it leaves.
     map.on('mouseleave', 'bird', function () {
-    map.getCanvas().style.cursor = '';
+        map.getCanvas().style.cursor = '';
     });
 
     let stockMarkers = null;
@@ -87,11 +82,11 @@ function main_piechart2d() {
         if(stockMarkers !== null) {
             marker.remove();
         }
-        var features = map.querySourceFeatures('birdsData');
+        featureData = map.querySourceFeatures('birdsData');
 
-        for (var i = 0; i < features.length; i++) {
-            var coords = features[i].geometry.coordinates;
-            var props = features[i].properties;
+        for (var i = 0; i < featureData.length; i++) {
+            var coords = featureData[i].geometry.coordinates;
+            var props = featureData[i].properties;
             var el = createDonutChart(props);
            
             marker = new mapboxgl.Marker({
@@ -130,7 +125,7 @@ function createDonutChart(props) {
     var varify = 0;
 
     var html =
-        '<div><svg width="' +
+        '<div id="svg"><svg width="' +
         w +
         '" height="' +
         w +
@@ -174,7 +169,7 @@ function createDonutChart(props) {
 
     html += '</svg></div>';
 
-    var el = document.createElement('div');
+    el = document.createElement('div');
     el.innerHTML = html;
     return el.firstChild;
 }

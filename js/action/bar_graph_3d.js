@@ -8,8 +8,10 @@ function main_barGraph_3d() {
     document.getElementById("3color-legend").style.display = 'none';
     document.getElementById("2color-legend").style.display = 'none';
     document.getElementById("rgbPoint").style.display = 'none';
+
+    clear_action()
   
-    const geojson = {
+    geojson = {
         "type": "FeatureCollection",
         "features": combi.slice(0).map(function(d) {
             return {

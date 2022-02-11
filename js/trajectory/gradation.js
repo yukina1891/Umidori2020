@@ -1,12 +1,9 @@
 function main_gradation() {
-    // console.log(combi);
-    // console.log(route);
     if(route != null){
         map.removeLayer('route');
         map.removeSource('route');
         route = null;
     }
-    // console.log(route);
 	const r = combi
 		.map(record => [record[2], record[3]])  // 緯度経度の組に変える
 	draw_gradation(r);

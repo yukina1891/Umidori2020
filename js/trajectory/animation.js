@@ -1,4 +1,3 @@
-
 var colors = [
     '#000000',      // 黒
     '#ff0000',      // 赤
@@ -13,7 +12,6 @@ var colors = [
     '#00ffff'       // 水
 ];
 
-// let route = null;
 function main_animation(counter) {
     animationButton.style.display = 'block';
     if(route != null){

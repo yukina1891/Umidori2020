@@ -1,6 +1,4 @@
-// let route = null;
 function main_saturation() {
-    // console.log(combi);
     if(route != null){
         map.removeLayer('route');
         map.removeSource('route');

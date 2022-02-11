@@ -1,4 +1,4 @@
-//座標データと着水データを結合する
+//座標データと着水データを読み込む
 
 var kiseki = []; //変換前の軌跡データ
 var tyakusui = []; //変換前の軌跡データ
@@ -53,7 +53,7 @@ function reqListener () {
 	}
 }
 
-function ff() {
+function read_median() {
 	if(N_med == 0){
 		conversion_kiseki();
 		conversion_tyakusui();

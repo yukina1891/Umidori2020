@@ -7,11 +7,7 @@ function main_rgbPoint(data_number) {
     document.getElementById("2color-legend").style.display = 'none';
     document.getElementById("rgbPoint").style.display = 'block';
 
-    if(rgbPoint != null){
-        map.removeLayer('rgbPoint0');
-        map.removeSource('rgbPoint0');
-        rgbPoint = null;
-    }
+    clear_action()
 
     for (var i = 0; i < combi.length; i++) {
         const record = combi[i];

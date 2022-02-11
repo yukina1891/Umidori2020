@@ -1,4 +1,10 @@
 function main_piechart3d() {
+    color_3d1 = document.getElementById("flying_3d").value;
+    color_3d2 = document.getElementById("feeding_3d").value;
+    color_3d3 = document.getElementById("rest_3d").value;
+
+    birdColors_3d = [color_3d1, color_3d2, color_3d3];
+    
     document.getElementById("3color-legend").style.display = 'block';
     document.getElementById("2color-legend").style.display = 'none';
     document.getElementById("rgbPoint").style.display = 'none';
@@ -7,18 +13,8 @@ function main_piechart3d() {
     color_3d2 = document.getElementById("feeding_3d").value;
     color_3d3 = document.getElementById("rest_3d").value;
     birdColors_3d = [color_3d1, color_3d2, color_3d3];
-    if(features != null){
-        map.removeLayer('bird');
-        map.removeSource('birdsData');
-        marker.remove();
-        features = null;
-        jsondata = null;
-    }
-    if(rgbPoint != null){
-        map.removeLayer('rgbPoint0');
-        map.removeSource('rgbPoint0');
-        rgbPoint = null;
-    }
+    
+    clear_action()
 
     features = combi.slice(0).map(record => ({
         'type': 'Feature',
@@ -84,13 +80,12 @@ function main_piechart3d() {
 
     function updateMarkers_3d() {
         
-        var features = map.querySourceFeatures('birdsData');
+        featureData = map.querySourceFeatures('birdsData');
 
-        for (var i = 0; i < features.length; i++) {
-            var coords = features[i].geometry.coordinates;
-            var props = features[i].properties;
-            var el = createDonutChart_3d(props);
-           
+        for (var i = 0; i < featureData.length; i++) {
+            var coords = featureData[i].geometry.coordinates;
+            var props = featureData[i].properties;
+            el = createDonutChart_3d(props);
             marker = new mapboxgl.Marker({
                 element: el
             }).setLngLat(coords);
@@ -109,7 +104,7 @@ function main_piechart3d() {
 
 function createDonutChart_3d(props) {
     var offsets = [];
-    var counts = [
+    counts = [
         props.flying,
         props.feeding,
         props.rest
@@ -124,8 +119,8 @@ function createDonutChart_3d(props) {
     var r0 = Math.round(r * 0.6);
     var w = r * 2;
 
-    var html =
-        '<div><svg width="' +
+    html =
+        '<div id="svg"><svg width="' +
         w +
         '" height="' +
         w +
@@ -149,7 +144,7 @@ function createDonutChart_3d(props) {
 
     html += '</svg></div>';
 
-    var el = document.createElement('div');
+    el = document.createElement('div');
     el.innerHTML = html;
     return el.firstChild;
 }
